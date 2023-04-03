@@ -70,19 +70,19 @@ RUN rm -rf /var/log/mysql && rm -rf /var/lib/mysql
 
 # Install trim_galore
 RUN mkdir -p /rnadetector/tmp/ && PW=$(pwd) && cd /rnadetector/tmp/ && \
-    curl -fsSL https://github.com/FelixKrueger/TrimGalore/archive/0.6.6.tar.gz -o trim_galore.tar.gz && \
+    curl -fsSL https://github.com/FelixKrueger/TrimGalore/archive/0.6.10.tar.gz -o trim_galore.tar.gz && \
     tar -zxvf trim_galore.tar.gz && \
-    cp TrimGalore-0.6.6/trim_galore /usr/local/bin/ && cd "$PW" && rm -r /rnadetector/tmp/
+    cp TrimGalore-0.6.10/trim_galore /usr/local/bin/ && cd "$PW" && rm -r /rnadetector/tmp/
 
-# Install pandoc 2.9.2.1
+# Install pandoc 3.1.2.1
 RUN mkdir -p /rnadetector/tmp/ && PW=$(pwd) && cd /rnadetector/tmp/ && \
     apt remove -y pandoc && \
-    curl -fsSL https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-1-amd64.deb -o pandoc.deb && \
+    curl -fsSL https://github.com/jgm/pandoc/releases/download/3.1.2/pandoc-3.1.2-1-amd64.deb -o pandoc.deb && \
     dpkg -i pandoc.deb && cd "$PW" && rm -r /rnadetector/tmp/
 
-# Install salmon
+# Install salmon 1.10.0
 RUN mkdir -p /rnadetector/tmp/ && PW=$(pwd) && cd /rnadetector/tmp/ && \
-    curl -fsSL https://github.com/COMBINE-lab/salmon/releases/download/v1.4.0/salmon-1.4.0_linux_x86_64.tar.gz -o salmon.tar.gz && \
+    curl -fsSL https://github.com/COMBINE-lab/salmon/releases/download/v1.10.0/salmon-1.10.0_linux_x86_64.tar.gz -o salmon.tar.gz && \
     tar -zxvf salmon.tar.gz && \
     mv salmon-latest_linux_x86_64/ /opt/salmon/ && \
     ln -s /opt/salmon/bin/salmon /usr/bin/salmon && cd "$PW" && rm -r /rnadetector/tmp/
@@ -96,9 +96,9 @@ RUN mkdir -p /rnadetector/tmp/ && PW=$(pwd) && cd /rnadetector/tmp/ && \
 
 # Install stringtie from source
 RUN mkdir -p /rnadetector/tmp/ && PW=$(pwd) && cd /rnadetector/tmp/ && \
-    curl -fsSL http://ccb.jhu.edu/software/stringtie/dl/stringtie-2.0.6.tar.gz -o stringtie.tar.gz && \
+    curl -fsSL http://ccb.jhu.edu/software/stringtie/dl/stringtie-2.2.1.tar.gz -o stringtie.tar.gz && \
     tar -xzvf stringtie.tar.gz && \
-    cd /rnadetector/tmp/stringtie-2.0.6 && \
+    cd /rnadetector/tmp/stringtie-2.2.1 && \
     make release && \
     cp stringtie /usr/local/bin/stringtie && \
     cp prepDE.py /usr/local/bin/prepDE.py && \
